@@ -1,13 +1,3 @@
-"""run_trade_machine.py
-
-Terminal front end for the trade_machine package. No rules live here:
-this file only reads input, prints rosters, and asks trade.py for a verdict.
-
-Put this file in the project root (next to main.py, not inside trade_machine/).
-Run it with:  python run_trade_machine.py
-or right-click it in PyCharm -> Run.
-"""
-
 from pathlib import Path
 
 from trade_machine.cba_rules import FIRST_APRON, SECOND_APRON
@@ -36,12 +26,7 @@ def ask_team(prompt: str, teams: dict[str, Team], taken: str | None = None) -> T
 
 
 def ask_player_ids(team: Team) -> list[int]:
-    """Read comma-separated player_ids for one side of the trade.
 
-    Only catches typos (text that isn't a number, or an id that isn't on
-    this roster) so the user can retype. Everything else, like an empty side
-    or a repeated id, goes to validate_trade so your rules decide it.
-    """
     on_roster = {p.player_id for p in team.players}
     while True:
         raw = input(f"\nPlayer IDs {team.abbr} sends (comma-separated, e.g. 3,7): ").strip()

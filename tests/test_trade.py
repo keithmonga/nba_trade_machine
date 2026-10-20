@@ -1,8 +1,3 @@
-"""Tests for trade.py. All teams are fake and built in code (trap T5),
-so these never break when real CSV salaries change.
-Expected numbers use 2026-27 values: FIRST_APRON 209,015,000,
-SECOND_APRON 221,686,000, MIDDLE_ADD 9,096,000."""
-
 import pytest
 
 from trade_machine.cba_rules import FIRST_APRON, SECOND_APRON

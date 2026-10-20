@@ -1,6 +1,3 @@
-"""Tests for cba_rules.py. Every expected number was calculated by hand
-with 2026-27 values: MIDDLE_ADD = 9,096,000, CUSHION = 250,000."""
-
 import pytest
 
 from trade_machine import cba_rules

@@ -77,10 +77,7 @@ def load_team(path) -> Team:
     path = Path(path)
     abbr = path.stem.upper()
 
-    # dtype=str: read every cell as raw text so pandas never guesses a type
-    # (no surprise floats). We convert each column ourselves below.
-    # utf-8-sig: strips the invisible BOM character Excel puts at the start
-    # of the file, which would otherwise turn "player_id" into "﻿player_id".
+
     df = pd.read_csv(path, dtype=str, encoding="utf-8-sig", keep_default_na=False)
 
     columns = [c.strip() for c in df.columns]

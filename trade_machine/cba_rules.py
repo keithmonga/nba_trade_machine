@@ -1,12 +1,3 @@
-"""cba_rules.py
-
-All league numbers for the 2026-27 season plus the pure salary-matching math.
-No file reading, no Team objects, no project imports. To update for a new
-season, edit the constants in the first section and nothing else.
-
-Source: Hoops Rumors, "Salary Cap, Tax Line Set For 2026/27 NBA Season" (June 2026).
-"""
-
 # ---------------------------------------------------------------------------
 # 2026-27 league thresholds (whole dollars)
 # ---------------------------------------------------------------------------
@@ -30,7 +21,6 @@ CUSHION = 250_000
 # the cap every season. 2026-27 value per Hoops Rumors.
 MIDDLE_ADD = 9_096_000
 
-# Bracket edges are NOT separate rules. They are the points where the formulas
 # in max_incoming() cross, so they are derived here instead of typed in by hand.
 # That way, changing MIDDLE_ADD can never leave the brackets out of sync.
 #
@@ -50,17 +40,6 @@ def _check_dollars(amount, label: str) -> None:
 
 
 def max_incoming(outgoing: int) -> int:
-    """Most salary a team ending BELOW the first apron can take back
-    for `outgoing` dollars sent out.
-
-    CBA formula: the greater of
-        (a) the lesser of 200% of outgoing + CUSHION, and outgoing + MIDDLE_ADD
-        (b) 125% of outgoing + CUSHION
-
-    Integer math only. Floor division is exact for this purpose: incoming
-    salaries are whole dollars, so "incoming <= 1.25 * outgoing + CUSHION"
-    is the same test as "incoming <= outgoing * 5 // 4 + CUSHION".
-    """
     _check_dollars(outgoing, "outgoing")
 
     two_hundred = outgoing * 2 + CUSHION
@@ -71,9 +50,6 @@ def max_incoming(outgoing: int) -> int:
 
 
 def matching_bracket(outgoing: int) -> str:
-    """Which bracket an outgoing amount falls in. For messages only;
-    max_incoming() does not need it. At an exact edge both formulas
-    give the same number, so the label choice there doesn't change the math."""
     _check_dollars(outgoing, "outgoing")
     if outgoing <= LOWER_BRACKET:
         return "200% + $250K"
